@@ -52,8 +52,8 @@ def format_num(contacts):
         result.append(res)
            # Формируем список списков
         gen = _split_list(result, 1)
-        for item in gen:
-            cont_list.append(item)
+    for item in gen:
+        cont_list.append(item)
     return cont_list
 
 
