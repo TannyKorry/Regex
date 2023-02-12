@@ -44,20 +44,39 @@ def _split_list(L, n):
 # 2
 def format_num(contacts):
     result, cont_list, res = [], [], ''
-    for contact in contacts:
+    for contact in arrange(contacts):
         for item in contact:
             pattern = r'(\+7|8)\s*\(?(\d{3})\)?[\s|-]?(\d{3})[\s|-]?(\d{2})[\s|-]?(\d{2})\s*\(?([д][о]?[б]?[.]?\s*\d+)?\)?'
             substitution = r'+7(\2)\3-\4-\5 \6'
             res = re.sub(pattern, substitution, item)
         result.append(res)
            # Формируем список списков
-        gen = _split_list(result, 1)
+    gen = _split_list(result, 1)
     for item in gen:
         cont_list.append(item)
     return cont_list
 
-
-
+# 3
+def remove_duplicates(contacts):
+    item_set = []
+    shablon = ''
+    print(f"функция\n "
+           f"{format_num(contacts)}\n")
+    for item in format_num(contacts)[0::]:
+        print(f'item: {item}')
+        shablon = item[0].split(',')[0]
+        print(f'шаблон: {shablon}\n')
+        for itm in format_num(contacts)[0::]:
+            print(f'\nitm: {itm}\n')
+            print(f"itm[0].split(',')[0]: {itm[0].split(', ')[0]} равен {shablon}?")
+            if itm[0].split(',')[0] == shablon:
+                if shablon in item_set:
+                    print('уже есть')
+                else:
+                    item_set += itm
+                pprint(f'item_set: {item_set}')
+            else:
+                pass
 
 
 #
@@ -87,11 +106,9 @@ def format_num(contacts):
 #   datawriter.writerows(contacts_list)
 
 
-
-
 if __name__ == '__main__':
-
-    pprint(format_num(arrange(contacts_list)))
-    # print('\n')
-
+    # pprint(arrange(contacts_list))
+    # pprint(format_num(contacts_list))
+    print('\n')
+    remove_duplicates(contacts_list)
 
